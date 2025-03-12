@@ -1,0 +1,1 @@
+INSERT INTO `coin` VALUES (1,'USD','美金'),(2,'GBP','英鎊'),(3,'EUR','歐元')
