@@ -2,18 +2,16 @@ package priv.lixin.interview.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "coin")
 public class Coin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long coinNo;
+    private Long coinNo;
     private String coinType;
     private String coinChineseName;
 
