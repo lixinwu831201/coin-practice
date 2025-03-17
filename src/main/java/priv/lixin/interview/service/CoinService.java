@@ -16,6 +16,7 @@ import java.util.Map;
 
 @Service
 @Transactional
+// 未做錯誤處理
 public class CoinService {
 
     @Autowired

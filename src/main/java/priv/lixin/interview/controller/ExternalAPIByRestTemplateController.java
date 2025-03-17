@@ -2,6 +2,7 @@ package priv.lixin.interview.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,13 +32,21 @@ public class ExternalAPIByRestTemplateController {
     @GetMapping("/original")
     public ResponseEntity<?> callExternalAPI() {
         String uri = "https://kengp3.github.io/blog/coindesk.json";
-        return ResponseEntity.ok(this.restTemplate.getForObject(uri, DataModel.class));
+        DataModel dataModel = this.restTemplate.getForObject(uri, DataModel.class);
+        if (dataModel == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return ResponseEntity.ok(dataModel);
     }
 
     @GetMapping("/transform")
     public ResponseEntity<?> callExternalAPIAndTransform() {
         String uri = "https://kengp3.github.io/blog/coindesk.json";
-        ResponseDTO responseDTO = coinService.mergeExternalAPI(this.restTemplate.getForObject(uri, DataModel.class));
+        DataModel dataModel = this.restTemplate.getForObject(uri, DataModel.class);
+        if (dataModel == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        ResponseDTO responseDTO = coinService.mergeExternalAPI(dataModel);
         return ResponseEntity.ok(responseDTO);
     }
 
