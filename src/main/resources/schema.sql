@@ -1,7 +1,7 @@
-create table coin(
-  coinNo int not null AUTO_INCREMENT,
-  coinType varchar(10) not null UNIQUE,
-  coinChineseName varchar(10) not null,
+CREATE TABLE IF NOT EXISTS coin(
+  coinNo INT NOT NULL AUTO_INCREMENT,
+  coinType VARCHAR(10) NOT NULL UNIQUE,
+  coinChineseName VARCHAR(10) NOT NULL,
   PRIMARY KEY (coinNo),
   CONSTRAINT coinTypeUnique UNIQUE(coinType)
 );
